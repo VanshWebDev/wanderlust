@@ -42,7 +42,19 @@ app.listen(port, () => {
   console.log(`app listening on port ${port}`);
 });
 
+const store = MongoStore.create({
+  client: mongoose.connection.getClient(), // Use mongoose connection client
+  crypto: {
+    secret: session_secret,
+  },
+  touchAfter: 24 * 3600, // Adjust as needed
+});
+
+store.on("error", () => {
+  console.log("some error occured in mongo store");
+});
 let sessionOption = {
+  store,
   secret: session_secret,
   resave: false,
   saveUninitialized: true,
@@ -54,15 +66,6 @@ let sessionOption = {
 };
 
 /* The middlewares for session */
-app.use(
-  session({
-    secret: session_secret,
-    store: MongoStore.create({ mongoUrl: dbUrl }),
-    touchAfter: 24 * 3600, // time period in seconds,
-    saveUninitialized: true,
-    resave: false,
-  })
-);
 app.use(session(sessionOption));
 app.use(flash());
 /* The middlewares for authentication */
