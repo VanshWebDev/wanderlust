@@ -49,7 +49,8 @@ const store = MongoStore.create({
   },
   touchAfter: 24 * 3600, // Adjust as needed
 });
-
+const client = mongoose.connection.getClient();
+console.log(client);
 store.on("error", () => {
   console.log("some error occured in mongo store");
 });
