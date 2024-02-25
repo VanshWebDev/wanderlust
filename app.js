@@ -42,12 +42,13 @@ app.listen(port, () => {
 });
 
 const store = MongoStore.create({
-  mongoUrl: URL,
+  client: mongoose.connection.getClient(), // Use mongoose connection client
   crypto: {
     secret: session_secret,
   },
-  touchAfter: 24 * 60 * 60,
+  touchAfter: 24 * 60 * 60, // Adjust as needed
 });
+
 store.on("error", () => {
   console.log("some error occured in mongo store", err);
 });
