@@ -20,6 +20,7 @@ const flash = require("connect-flash"); // Import connect-flash for flash messag
 const passport = require("passport"); // Import passport for authentication
 const LocalStrategy = require("passport-local"); // Import passport-local for local authentication strategy
 const User = require("./Models/user.js"); // Import the User model
+const { url } = require("inspector");
 
 //All middlewares
 app.use(express.urlencoded({ extended: true }));
@@ -31,10 +32,10 @@ app.use(express.static(path.join(__dirname, "public/css")));
 app.use(express.static(path.join(__dirname, "public/js")));
 
 //main function to connect with mongodb
-const URL = process.env.MONGO_ATLAS_URL;
+const dbUrl = process.env.MONGO_ATLAS_URL;
 const session_secret = process.env.SESSION_SECRET;
 async function main() {
-  await mongoose.connect(URL);
+  await mongoose.connect(dbUrl);
 }
 main().catch((err) => console.log(err));
 app.listen(port, () => {
@@ -42,7 +43,7 @@ app.listen(port, () => {
 });
 
 const store = MongoStore.create({
-  mongoUrl: URL, // Use mongoose connection client
+  mongoUrl: dbUrl, // Use mongoose connection client
   crypto: {
     secret: session_secret,
   },
