@@ -99,5 +99,6 @@ app.all("*", (req, res, next) => {
 /*-------------- Error handling middleware function. --------------*/
 app.use((err, req, res, next) => {
   const { status = 500, message = "Something went wrong!" } = err;
+  console.log(err)
   res.status(status).render("err", { err });
 });
