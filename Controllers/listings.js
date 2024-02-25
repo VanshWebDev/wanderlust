@@ -2,7 +2,7 @@ const Listing = require("../Models/listing");
 const multer = require("multer");
 const { isAuthenticated } = require("../middleware");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
-const mapToken = process.env.MAPBOX_TOKEN;
+const mapToken = 'pk.eyJ1IjoiZGVsdGEtc3R1ZHVlbnQiLCJhIjoiY2xvMDk0MTVhMTJ3ZDJrcGR5ZDFkaHl4ciJ9.Gj2VU1wvxc7rFVt5E4KLOQ';
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 // it will show all listing
