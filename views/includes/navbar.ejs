@@ -1,0 +1,35 @@
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet" >
+<nav class="navbar navbar-expand-md bg-body-tertiary navbar-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/listings">Home</a>
+        <a class="nav-link" href="/listings/new">Create New</a>
+      </div>
+      <div>
+      <form class="d-flex" role="search" method="get" action="/listings/search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" >
+        <button class="btn btn-danger" type="submit">Search</button>
+      </form>
+     </div>
+      <div class="navbar-nav ms-auto">
+        <% if (loggedIn) { %>
+          <a class="nav-link" href="/logout">Logout</a>
+        <% } else { %>
+          <a class="nav-link" href="/signup">Signup</a>
+          <a class="nav-link" href="/login">Login</a>
+        <% } %>
+      </div>
+      
+    </div>
+  </div>
+</nav>

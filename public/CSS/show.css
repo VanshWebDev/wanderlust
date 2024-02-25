@@ -1,0 +1,120 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.listing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.listing-item {
+  width: 80%;
+  max-width: 600px;
+  margin: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(51, 50, 50, 0.274);
+}
+
+.listing-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.listing-details {
+  padding: 15px;
+}
+
+.listing-details h2 {
+  font-style: normal;
+  color: black;
+  margin: 0;
+  font-size: 18px;
+}
+
+.listing-details p {
+  color: black;
+  margin: 5px 0;
+  font-size: 14px;
+}
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 20px;
+}
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+  /* Set a background color */
+}
+
+.listing-item {
+  background-color: #fff;
+  /* Set a white background */
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  /* Add a shadow effect */
+  margin-bottom: 20px;
+}
+
+.listing-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.listing-details h2 {
+  color: #333;
+  /* Set text color to dark */
+  margin-top: 15px;
+}
+
+.listing-details p {
+  color: #555;
+  /* Set text color to gray */
+  margin-top: 5px;
+}
+
+.delete-btn {
+  background-color: #ff4d4f;
+  /* Set delete button color */
+  color: #fff;
+  /* Set text color to white */
+  border: none;
+  /* Remove button border */
+  border-radius: 5px;
+  /* Add border radius */
+  padding: 10px 20px;
+  /* Add padding */
+  cursor: pointer;
+  /* Add pointer cursor */
+}
+
+.delete-btn:hover {
+  background-color: #ff7875;
+  /* Change background color on hover */
+}
+
+.review-form {
+  margin-top: 30px;
+  /* Add space between listing item and review form */
+}
+
+.review {
+  border: 2px solid rgba(64, 220, 248, 0.63);
+  border-radius: 8px;
+  background: #81f5b5a6;
+}
+/*-------------- map----------- */
+/*-------------- map----------- */
+/*-------------- map----------- */

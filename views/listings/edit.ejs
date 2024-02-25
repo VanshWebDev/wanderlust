@@ -1,0 +1,92 @@
+<%- layout("../layouts/boilerplate.ejs") %>
+<body>
+<style>
+  #exampleFormControlInput1{
+    border: 2px solid rgba(78, 78, 78, 0.281);
+  }
+  .img{
+    height: 100px;
+    border-radius: 20px;
+  }
+</style>
+<%- include("../includes/navbar.ejs") %>
+  <div class="col-4 offset-4">
+  <h1>Edit singleEdit</h1>
+  <form action="/listing/<%= singleEdit._id %>/edit" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">your id only for read</label>
+      <input  readonly value="<%= singleEdit._id %>" class="form-control" required id="exampleFormControlInput1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      <input type="text" name="title" value="<%= singleEdit.title %>" class="form-control" required id="exampleFormControlInput1">
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please choose a title.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Description</label>
+      <textarea name="description" rows="4" class="form-control" required id="exampleFormControlInput1"><%= singleEdit.description %></textarea>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please write a description.
+      </div>
+    </div>
+    <div>
+      <img class="img" src="<%= singleEdit.image.url %>" alt="">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Image URL</label>
+      <input type="file" name="image" value="<%= singleEdit.image.url %>" placeholder=" enter image url" class="form-control"  id="exampleFormControlInput1">
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please choose a image URL.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Price</label>
+      <input type="text" name="price" value="<%= singleEdit.price %>" placeholder="Price" class="form-control" required id="exampleFormControlInput1">
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please choose a price.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Location</label>
+      <input type="text" name="location" value="<%= singleEdit.location %>" class="form-control" required id="exampleFormControlInput1">
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please choose a location.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Country</label>
+      <input type="text" name="country" value="<%= singleEdit.country %>" placeholder="Country" class="form-control" required id="exampleFormControlInput1">
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        Please choose a country.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="/listing/<%= singleEdit._id %>" class="btn btn-warning">Go Back</a>
+  </form>
+</div>
+
+<script src="/validation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

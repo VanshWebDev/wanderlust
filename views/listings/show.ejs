@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- font-awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- map api -->
+  <script
+    src="https://apis.mappls.com/advancedmaps/api/7f423088a615e4eb179cbd90f63c4243/map_sdk?v=3.0&layer=vector"></script>
+
+  <link rel="stylesheet" href="/rating.css">
+  <link rel="stylesheet" href="/show.css">
+
+</head>
+<style>
+  .map {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+</head>
+
+<body>
+  <%- include("../includes/navbar.ejs") %>
+
+    <% if (success.length || error.length) { %>
+      <div class="container">
+        <div class="container">
+          <div class="alert alert-success alert-dismissible fade show col-4 pffset-8" role="alert">
+            <strong>
+              <%= error %>
+                <%= success %>
+            </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+      <% } %>
+
+        <div class="container mt-5">
+          <a href="/listings" class="btn btn-primary mb-3">Go Back</a>
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="listing-item p-4">
+                <code><b><h2><%= singleListing.owner.username %></h2></b></code>
+                <img src="<%= singleListing.image.url %>" alt="<%= singleListing.title %>" class="img-fluid mb-3" />
+                <div class="listing-details">
+                  <h2>
+                    <%= singleListing.title %>
+                  </h2>
+                  <p>
+                    <%= singleListing.location %>, <%= singleListing.country %>
+                  </p>
+                  <p>
+                    &#8377;<%= singleListing.price.toLocaleString("en-IN") %>/night
+                  </p>
+                  <p>
+                    <%= singleListing.description %>
+                  </p>
+                </div>
+                <% if (loggedIn && loggedIn.username===singleListing.owner.username) { %>
+                  <form class="form" action="/listings/<%= singleListing._id %>?_method=DELETE" method="post">
+                    <button type="button" class="deleteBtn btn btn-danger ">Delete</button>
+                    <a href="/listing/<%= singleListing._id %>/edit" class="btn btn-primary">Edit</a>
+                  </form>
+                  <% } %>
+
+              </div>
+            </div>
+
+            <% if (loggedIn) { %>
+
+              <div class="col-md-4">
+                <form action="/listing/<%= singleListing._id %>/reviews" novalidate class="review-form needs-validation"
+                  method="post">
+                  <div class="mb-3">
+                    <fieldset class="starability-slot">
+                      <legend>First rating:</legend>
+                      <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked
+                        aria-label="No rating." />
+                      <input type="radio" id="first-rate1" name="rating" value="1" />
+                      <label for="first-rate1" title="Terrible">1 star</label>
+                      <input type="radio" id="first-rate2" name="rating" value="2" />
+                      <label for="first-rate2" title="Not good">2 stars</label>
+                      <input type="radio" id="first-rate3" name="rating" value="3" />
+                      <label for="first-rate3" title="Average">3 stars</label>
+                      <input type="radio" id="first-rate4" name="rating" value="4" />
+                      <label for="first-rate4" title="Very good">4 stars</label>
+                      <input type="radio" id="first-rate5" name="rating" value="5" />
+                      <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                  </div>
+                  <div class="mb-3">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea class="form-control" placeholder="Comment" name="comment" id="comment" rows="3"
+                      required></textarea>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                      Please write a review.
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <a href="/listings" class="btn btn-warning">Go Back</a>
+                </form>
+              </div>
+              <% } %>
+          </div>
+        </div>
+
+        <div class="container text-center">
+          <h2 class="mb-4">
+            <%= singleListing.reviews.length ? "Reviews" : '' %>
+          </h2>
+          <div class="row">
+            <% for (let i of singleListing.reviews) { %>
+              <div class="car col-6 mb-4">
+                <div class="card">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+
+                      <code>@<%= i.author.username %></code>
+
+                    </li>
+                    <li class="list-group-item">Comment: <%= i.comment %>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-center">
+                      <p class="starability-result" data-rating=<%=i.rating %> ></p>
+                    </li>
+                    <li class="list-group-item">
+                      Created At: <code><%= i.createdAt.toLocaleString() %></code>
+                    </li>
+                    <li class="list-group-item">
+                      <form action="/listing/<%= singleListing._id %>/reviews/<%= i._id %>?_method=DELETE"
+                        method="post">
+                        <button class="btn btn-sm btn-dark" type="submit">
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <% } %>
+          </div>
+        </div>
+        <div class="map">
+          <div id="map" class="my-4" style="border-radius: 20px; height: 500px; width: 70%;"></div>
+        </div>
+
+        <script>
+          let lng = '<%=singleListing.geometry.coordinates[0] %>'
+          let lat = '<%=singleListing.geometry.coordinates[1] %>'
+          map = new mappls.Map('map', { center: { lat: lat, lng: lng } });
+          var marker = new mappls.Marker({
+            map: map,
+            position: { "lat": lat, "lng": lng },
+            width: 35,
+            height: 100,
+            popupOptions: true,
+            popupHtml: '<b> <%=singleListing.location%>,<%=singleListing.country%> </b>',
+            clustersOptions: { "color": "blue", "bgcolor": "red" },
+            html: '<h1>🫡</h1>'
+          });
+          // Show popup on marker mouseleave
+          marker.getElement().addEventListener('mouseenter', function () {
+            marker.getPopup().addTo(map);
+          });
+          // Hide popup on marker mouseleave
+          marker.getElement().addEventListener('mouseleave', function () {
+            marker.getPopup().remove();
+          });
+          // --------------------------------------------//
+
+          let deleteBtn = document.querySelector(".deleteBtn");
+          deleteBtn.addEventListener("click", () => {
+            let ask = confirm("Are you sure you want to delete the post?");
+            if (ask) {
+              deleteBtn.closest("form").submit();
+              console.log("deleted");
+            } else {
+              console.log("Deletion canceled");
+            }
+          });
+        </script>
+        <script src="/validation.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+          crossorigin="anonymous"></script>
+</body>
+
+</html>
