@@ -23,8 +23,8 @@ const User = require("./Models/user.js"); // Import the User model
 const { url } = require("inspector");
 
 //All middlewares
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
+app.use(express.urlencoded({ extended: true }));//line is used to make body obj readable.
+app.use(methodOverride("_method"));//used to convert post req into other like delete and patch and many other.
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views/listings"));
