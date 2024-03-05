@@ -36,7 +36,7 @@ const dbUrl = process.env.MONGO_ATLAS_URL;
 const session_secret = process.env.SESSION_SECRET;
 async function main() {
   await mongoose.connect(dbUrl);
-}
+} 
 main().catch((err) => console.log(err));
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
