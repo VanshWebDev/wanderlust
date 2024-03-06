@@ -28,8 +28,8 @@ app.use(methodOverride("_method"));//used to convert post req into other like de
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views/listings"));
-app.use(express.static(path.join(__dirname, "public/css")));
-app.use(express.static(path.join(__dirname, "public/js")));
+app.use(express.static(path.join(__dirname, "public/CSS")));
+app.use(express.static(path.join(__dirname, "public/JS")));
 
 //main function to connect with mongodb
 const dbUrl = process.env.MONGO_ATLAS_URL;
