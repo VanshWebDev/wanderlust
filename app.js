@@ -37,7 +37,7 @@ const session_secret = process.env.SESSION_SECRET;
 async function main() {
   await mongoose.connect(dbUrl);
 } 
-main().catch((err) => console.log(err));
+main().catch((err) => console.log('some error occured',err));
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
 });

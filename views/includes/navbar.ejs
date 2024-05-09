@@ -1,5 +1,18 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet" >
-<nav class="navbar navbar-expand-md bg-body-tertiary navbar-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-md bg-body-tertiary navbar-light border-bottom sticky-top" >
+  <style>
+    .placeholder{
+      background-color: white;
+      cursor: text;
+      color: black !important;
+      /* height: 37px; */
+    }
+    .placeholder::placeholder{
+      font-size: 12px ;
+      background-color: white;
+      color: black !important;
+    }
+  </style>
   <div class="container-fluid">
     <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a>
     <button
@@ -16,9 +29,9 @@
         <a class="nav-link" href="/listings/new">Create New</a>
       </div>
       <div>
-      <form class="d-flex" role="search" method="get" action="/listings/search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" >
-        <button class="btn btn-danger" type="submit">Search</button>
+      <form class="d-flex p-1" role="search" method="get" action="/listings/search" style="height: 50px;">
+        <input class="form-control me-2 placeholder" type="search" placeholder="find Based on category" aria-label="Search" name="search" >
+        <button class="btn btn-danger m-0" type="submit">Search</button>
       </form>
      </div>
       <div class="navbar-nav ms-auto">
